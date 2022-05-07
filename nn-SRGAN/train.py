@@ -18,7 +18,7 @@ if __name__ == '__main__':
         out_weight_dir = './weight_output'
         # out_pic_dir = './pic_output'
         upscale_factor = 2
-        batch_size = 40
+        batch_size = 64
         num_epochs = 100
         step = 40
         lr = 1e-3
@@ -211,6 +211,9 @@ data_frame = pd.DataFrame(
           'Loss_G': results['g_loss'],
           'Score_D': results['d_score'],
           'Score_G': results['g_score'],
+          'psnr': results['psnr'],
+          'ssim': results['ssim'],
+          'nqm': results['nqm'],
           }, index=range(1, epoch+1)
 )
 # %%

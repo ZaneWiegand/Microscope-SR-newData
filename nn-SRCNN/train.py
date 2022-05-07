@@ -20,7 +20,7 @@ if __name__ == '__main__':  # ! Must have this
         eval_file = 'eval.h5'  # str
         output_dir = './weight_output'  # str
         lr = 1e-4  # float
-        batch_size = 20  # int
+        batch_size = 64  # int
         num_epochs = 100  # int
         step = 25  # Sets the learning rate to the initial LR decayed by momentum every n epochs
         num_workers = 0  # int
@@ -122,6 +122,10 @@ if __name__ == '__main__':  # ! Must have this
 
 # %%
 data_frame = pd.DataFrame(
-    data={'Loss': results['loss'], }, index=range(1, epoch+1))
+    data={'Loss': results['loss'],
+          'psnr': results['psnr'],
+          'ssim': results['ssim'],
+          'nqm': results['nqm'],
+          }, index=range(1, epoch+1))
 # %%
 data_frame.to_csv('train_results.csv', index_label='Epoch')

@@ -19,7 +19,7 @@ if __name__ == '__main__':
         train_file = 'train.h5'
         eval_file = 'eval.h5'
         output_dir = './weight_output'
-        batch_size = 20  # Training batch size
+        batch_size = 25  # Training batch size
         num_epochs = 100  # Number of epochs to train for
         lr = 0.1  # Learning rate
         clip = 0.4  # Clipping Gradients
@@ -120,6 +120,10 @@ if __name__ == '__main__':
 
 # %%
 data_frame = pd.DataFrame(
-    data={'Loss': results['loss'], }, index=range(1, epoch+1))
+    data={'Loss': results['loss'],
+          'psnr': results['psnr'],
+          'ssim': results['ssim'],
+          'nqm': results['nqm'],
+          }, index=range(1, epoch+1))
 # %%
 data_frame.to_csv('train_results.csv', index_label='Epoch')
