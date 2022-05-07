@@ -43,3 +43,5 @@ if not os.path.exists("../Data-Pre-upsample/20x_eval_syn"):
     os.makedirs("../Data-Pre-upsample/20x_eval_syn")
 if not os.path.exists("../Data-Pre-upsample/20x_truth"):
     os.makedirs("../Data-Pre-upsample/20x_truth")
+
+# %%
