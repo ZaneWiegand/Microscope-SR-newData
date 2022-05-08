@@ -10,7 +10,7 @@ if __name__ == '__main__':
     weights_file = './weight_output/netG_F2_epoch_100.pth'
     upscale_factor = 2
     plus = 1
-    number = 8
+    number = 24
     print('real data:')
     for pic_number in range(number):
         lr_file = '../Data-Post-upsample/10x_predict/10x{}.tif'.format(
