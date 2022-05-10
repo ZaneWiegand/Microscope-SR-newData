@@ -116,7 +116,8 @@ if __name__ == '__main__':
             # (2) Update G network: adversarial Loss + mse loss
 
             netG.zero_grad()
-            fake_out = netD(fake_img).mean()
+            fake_out = netD(fake_img).mean(-1).mean(-1).mean(-1)
+            # print(fake_out.shape)
 
             g_loss = generator_criterion(fake_out, fake_img, real_img)
             g_loss.backward()
@@ -125,8 +126,9 @@ if __name__ == '__main__':
             # loss for current batch before optimization
             running_results['g_loss'] += g_loss.item() * batch_size
             running_results['d_loss'] += d_loss.item() * batch_size
-            running_results['d_score'] += real_out.item() * batch_size
-            running_results['g_score'] += fake_out.item() * batch_size
+            running_results['d_score'] += netD(
+                real_img).mean().item() * batch_size
+            running_results['g_score'] += fake_out.mean().item() * batch_size
 
             train_bar.set_description(desc='[%d/%d] Loss_D: %.4f Loss_G: %.4f D(x): %.4f D(G(z)): %.4f' % (
                 epoch, args.num_epochs,
