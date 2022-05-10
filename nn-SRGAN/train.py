@@ -101,13 +101,14 @@ if __name__ == '__main__':
             fake_img = fake_img.to(device)
 
             netD.zero_grad()
-            # real_out = ((netD(real_img)-1)**2).mean()
-            # fake_out = (netD(fake_img)**2).mean()
+            real_out = 0.5*torch.mean((netD(real_img)-1)**2)
+            fake_out = 0.5*torch.mean(netD(fake_img)**2)
+            d_loss = real_out+fake_out
 
-            real_out = torch.mean(netD(real_img))
-            fake_out = torch.mean(netD(fake_img))
+            # real_out = torch.mean(netD(real_img))
+            # fake_out = torch.mean(netD(fake_img))
+            # d_loss = 1-real_out + fake_out
 
-            d_loss = 1-real_out + fake_out
             d_loss.backward(retain_graph=True)
             optimizerD.step()
 
