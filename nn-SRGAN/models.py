@@ -118,4 +118,4 @@ class Discriminator(nn.Module):
     def forward(self, x):
         # batch_size = x.size(0)
         # return self.net(x).view(batch_size)
-        return torch.mean(torch.sigmoid(self.net(x)))
+        return torch.sigmoid(self.net(x))
