@@ -5,6 +5,7 @@ from models import Generator
 import tifffile as tf
 import numpy as np
 from utils import calc_ssim, calc_psnr, calc_nqm
+import pandas as pd
 # %%
 if __name__ == '__main__':
     weights_file = './weight_output/netG_F2_epoch_100.pth'
@@ -12,6 +13,7 @@ if __name__ == '__main__':
     plus = 1
     number = 24
     print('real data:')
+    results = {'psnr': [], 'ssim': [], 'nqm': []}
     for pic_number in range(number):
         lr_file = '../Data-Post-upsample/10x_predict/10x{}.tif'.format(
             pic_number+plus)
@@ -54,3 +56,14 @@ if __name__ == '__main__':
         preds = preds.mul(255.0).cpu().numpy().squeeze(
             0).squeeze(0).astype(np.uint8)  # ? reason
         tf.imwrite('./pic_output/10x_out{}.tif'.format(pic_number+plus), preds)
+
+        results['psnr'].append(psnr)
+        results['ssim'].append(ssim)
+        results['nqm'].append(nqm)
+
+    data_frame = pd.DataFrame(
+        data={'PSNR': results['psnr'],
+              'SSIM': results['ssim'],
+              'NQM': results['nqm']
+              }, index=range(1, number+1))
+    data_frame.to_csv('test_results.csv', index_label='Epoch')
