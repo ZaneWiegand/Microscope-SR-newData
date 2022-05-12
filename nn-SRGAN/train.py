@@ -20,7 +20,7 @@ if __name__ == '__main__':
         upscale_factor = 2
         batch_size = 64
         num_epochs = 100
-        step = 25
+        step = 20
         lr = 1e-3
         num_workers = 0
         seed = 123
