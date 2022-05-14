@@ -12,7 +12,7 @@ if __name__ == '__main__':
     weights_file = './weight_output/epoch_100.pth'
     upscale_factor = 2
     plus = 1
-    number = 24
+    number = 96
     print('real data:')
     results = {'psnr': [], 'ssim': [], 'nqm': []}
     for pic_number in range(number):
