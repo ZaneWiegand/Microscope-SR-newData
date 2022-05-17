@@ -32,8 +32,8 @@ for pic_num in pic_list:
                 number_hr += 1
                 continue
             tf.imwrite(f'{hr_save_dir}/20x{hr_data_num}.tif', hr)
-            number_hr += 1
             hr_data_num += 1
+            number_hr += 1
     for i in range(0, img10x.shape[1] - lr_size + 1, lr_stride_x):
         for j in range(0, img10x.shape[0] - lr_size + 1, lr_stride_y):
             lr = img10x[j:j + lr_size, i:i + lr_size]
@@ -41,8 +41,8 @@ for pic_num in pic_list:
                 number_lr += 1
                 continue
             tf.imwrite(f'{lr_save_dir}/10x{lr_data_num}.tif', lr)
-            number_lr += 1
             lr_data_num += 1
+            number_lr += 1
 # %%
 for pic_num in pic_list:
     for flip_f in [-1, 0, 1]:
@@ -55,18 +55,18 @@ for pic_num in pic_list:
         for i in range(0, img20x.shape[1] - hr_size + 1, hr_stride_x):
             for j in range(0, img20x.shape[0] - hr_size + 1, hr_stride_y):
                 hr = img20x[j:j + hr_size, i:i + hr_size]
-            if number_hr in discard_list:
+                if number_hr in discard_list:
+                    number_hr += 1
+                    continue
+                tf.imwrite(f'{hr_save_dir}/20x{hr_data_num}.tif', hr)
+                hr_data_num += 1
                 number_hr += 1
-                continue
-            tf.imwrite(f'{hr_save_dir}/20x{hr_data_num}.tif', hr)
-            number_hr += 1
-            hr_data_num += 1
         for i in range(0, img10x.shape[1] - lr_size + 1, lr_stride_x):
             for j in range(0, img10x.shape[0] - lr_size + 1, lr_stride_y):
                 lr = img10x[j:j + lr_size, i:i + lr_size]
-            if number_lr in discard_list:
+                if number_lr in discard_list:
+                    number_lr += 1
+                    continue
+                tf.imwrite(f'{lr_save_dir}/10x{lr_data_num}.tif', lr)
+                lr_data_num += 1
                 number_lr += 1
-                continue
-            tf.imwrite(f'{lr_save_dir}/10x{lr_data_num}.tif', lr)
-            number_lr += 1
-            lr_data_num += 1
